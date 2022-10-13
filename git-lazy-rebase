@@ -1,0 +1,15 @@
+#!/bin/sh
+
+branch=$1
+currentBranch=$(git symbolic-ref --short -q HEAD)
+
+if [ ! -z "$1" ]
+then 
+  git stash
+  git checkout $branch
+  git pull origin $branch
+  git checkout -
+  git stash pop
+else
+  echo "Branch name is not specified"
+fi
